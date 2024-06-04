@@ -11,6 +11,7 @@ class simplex:
         self.Cb = []
         self.B = []
         self.v = []
+        self.iter = 0
         self.setBasicas()
     def setBasicas(self):
         self.Cb = []
@@ -37,7 +38,8 @@ class simplex:
                 if aux>x:
                     aux = x
                     cont = i
-            print(self.Xb)
+            self.iter+=1
+            print(self.iter)
             if aux<0:
                 d = self.varSalida(Bn,cont)
                 self.actualizar(Bn,np.dot(Bn,self.A),n,np.dot(a,self.b),np.dot(Bn,self.b))
@@ -72,6 +74,7 @@ class simplex:
     def actualizarFile(self,s):
         with open(r_a, "r") as archivo:
             d = json.load(archivo)
+            d["num_iter"] = self.iter
         with open(r_a, "w") as archivo:
             d["iteraciones"].append(s)
             json.dump(d, archivo, indent=2)

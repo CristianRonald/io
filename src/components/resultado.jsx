@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import data from './datos.json'
-import avanzar from './advance.svg'
-import retroceder from './backward.svg'
-import './App.css'
-export default function App() {
+import data from '../datos.json'
+import avanzar from '../advance.svg'
+import retroceder from '../backward.svg'
+export default function Resultado() {
   const [iteracion, setIteracion] = useState(0);
   const adelantar = () => setIteracion(iteracion + 1)
   const retrasar = () => setIteracion(iteracion - 1)
@@ -15,9 +14,8 @@ export default function App() {
   const results = d["results"];
   return (
     <>
-      <h1>Programacion lineal</h1>
+      <p>Iteracion: {iteracion + 1}</p>
       <div className="contenedor">
-        <p>Iteracion: {iteracion + 1}</p>
         <table className="tabla">
           <thead>
             <tr>
@@ -49,13 +47,13 @@ export default function App() {
           ))}
           <tr>
             <td>Z</td>
-            <td>{Number(result).toFixed(2)}</td>
+            <td>{result}</td>
           </tr>
         </table>
       </div>
       <div className="contenedor-boton" style={{ display: 'flex' }}>
         <button className={`boton adelantar`} style={(iteracion) ? { display: 'block' } : { display: 'none' }} onClick={retrasar}><img src={retroceder} /></button>
-        <button className={`boton adelantar`} style={(data["num_iter"] > iteracion + 1) ? { display: 'block' } : { display: 'none' }} onClick={adelantar}><img src={avanzar} /></button>
+        <button className={`boton adelantar`} style={(data["iteraciones"].length > iteracion + 1) ? { display: 'block' } : { display: 'none' }} onClick={adelantar}><img src={avanzar} /></button>
       </div>
     </>
   );
